@@ -1,6 +1,9 @@
+import { fetchTimetableApi } from "@/api/ptv";
 import Image from "next/image";
 
-export default function Home() {
+export default async function Home() {
+  const res = await fetchTimetableApi("/route_types");
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
@@ -54,6 +57,7 @@ export default function Home() {
           </h2>
           <p className="m-0 max-w-[30ch] text-sm opacity-50">
             Find in-depth information about Next.js features and API.
+            {res.data.route_types.map((type:any,i:any)=><p key={i}>{type.route_type_name}</p>)}
           </p>
         </a>
 
